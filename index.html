@@ -39,7 +39,9 @@
           <div class="well">
 
           <h2>室内亮度</h2>
-          <p class="text-muted">总亮度为100%</p>
+          <p class="text-muted">亮度范围:1-1000Lux<br />
+            百分比：当前亮度与最大测量亮度的比
+            </p>
           </div>
             <div id="chart">
             </div>
@@ -49,7 +51,8 @@
           <div class="container-fluid">
           <div class="well">
           <h2>室内温度</h2>
-          <p class="text-muted">每隔6秒更新一次温度数据                     </p>
+          <p class="text-muted">更新速度：每隔6秒更新一次温度数据
+            <br />单位：摄氏度</p>
           </div>
            <div id="chart1"> </div>
            
@@ -71,7 +74,7 @@ eon.chart({
     },
     gauge: {
       min: 0,
-      max: 100
+      max: 1000
     }
   },
 
