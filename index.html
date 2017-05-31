@@ -1,11 +1,59 @@
 <html>
-  <head>
-    <script type="text/javascript" src="https://pubnub.github.io/eon/v/eon/1.0.0/eon.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://pubnub.github.io/eon/v/eon/1.0.0/eon.css"/>  
-  </head>
-  <body>
-    <div id="chart"></div>
-    <div id="chart1"></div>
+<head>
+
+  <script type="text/javascript" src="//pubnub.github.io/eon/v/eon/1.0.0/eon.js" > </script>
+  <link type="text/css" rel="stylesheet" href="//pubnub.github.io/eon/v/eon/1.0.0/eon.css"./>
+
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,900,900italic,300italic,300' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="//pubnub.github.io/eon-builder/assets/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//pubnub.github.io/eon-builder/assets/plugins/font-awesome/css/font-awesome.css">
+  <link id="theme-style" rel="stylesheet" href="//pubnub.github.io/eon-builder/assets/css/styles.css">
+
+  <link rel="stylesheet" type="text/css" href="//pubnub.github.io/eon-builder/bower_components/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
+  <link href="//pubnub.github.io/eon-builder/bower_components/bootstrap-toggle/css/bootstrap-toggle.min.css" rel="stylesheet">
+  <link href="//pubnub.github.io/eon-builder/bower_components/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
+
+  <script type="text/javascript" src="//pubnub.github.io/eon-builder/bower_components/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="//pubnub.github.io/eon-builder/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="//pubnub.github.io/eon-builder/bower_components/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+  <script src="//pubnub.github.io/eon-builder/bower_components/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
+
+  <script src="//pubnub.github.io/eon-builder/bower_components/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+
+</head>
+<body>
+ 
+  <div class="container-fluid">
+
+    <div class="row">
+
+      <div class="col-md-12">
+
+          <div class="about">
+            <h1>智能家居远程监控系统</h1>
+            <p>基于PUBNUB云的实时数据监测</p>
+          </div>
+      </div>
+    </div>
+          <div class="well">
+
+          <h2>室内亮度</h2>
+          <p class="text-muted">总亮度为100%</p>
+          </div>
+            <div id="chart">
+            </div>
+            <p align="center" >lightness</p>
+          </div>
+
+          <div class="container-fluid">
+          <div class="well">
+          <h2>室内温度</h2>
+          <p class="text-muted">每隔6秒更新一次温度数据                     </p>
+          </div>
+           <div id="chart1"> </div>
+           
+    </div>
     <script>
      var pubnub = new PubNub({
   publishKey: "pub-c-a030c73b-9453-4361-9162-0e6ea8d5ebd9",
