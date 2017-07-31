@@ -39,7 +39,7 @@
           <div class="well">
 
           <h2>室内亮度</h2>
-          <p class="text-muted">亮度范围:1-1000Lux<br />
+          <p class="text-muted">亮度测量范围:1-100000Lux<br />
             百分比：当前亮度与最大测量亮度的比
             </p>
           </div>
@@ -47,7 +47,21 @@
             </div>
             <p align="center" >lightness</p>
           </div>
+        <!--此处为室内湿度显示，范围为0～100%  -->
+        <div class="container-fluid">
+        <div class="well">
 
+          <h2>室内湿度</h2>
+          <p class="text-muted">湿度范围:0～100%<br />
+            百分比：空气中实际水汽压与同温度下饱和水汽压的百分比
+            </p>
+          </div>
+            <div id="chart2">
+            </div>
+            <p align="center" >humidity</p>
+          </div>
+          </div>
+          <!--室内湿度显示结束  -->
           <div class="container-fluid">
           <div class="well">
           <h2>室内温度</h2>
@@ -57,24 +71,24 @@
            <div id="chart1"> </div>
            
     </div>
-  
-  <div class="control">
+     
+    <div class="control">
           <div class="container-fluid">
           <div class="well">
           <h2>室内电器控制</h2>
   <p class="text-muted">功能：室内各电器设备的开关控制和状态显示
        <br />操作方法：点击对应的电器开关即可打开或关闭对应的电器</p>
-           </div>
+          </div>
  
-          </div> 
+           
     </div>
-    <script>
-     var pubnub = new PubNub({
+  
+  <script>
+  var pubnub = new PubNub({
   publishKey: "pub-c-a030c73b-9453-4361-9162-0e6ea8d5ebd9",
   subscribeKey: "sub-c-776c5b6c-3969-11e7-b611-0619f8945a4f"
 });
-var channel = "WINC1500_FE:4C";
-      
+ var channel = "WINC1500_FE:4C";
  var count = 0;
  var state = "0"; 
  var flag;
@@ -83,8 +97,8 @@ var channel = "WINC1500_FE:4C";
     flag =message.message.led_r;
       console.log(message);
     }
- })
-      
+})
+ <!--亮度传感器图表 -->  
 eon.chart({
   pubnub: pubnub,
   channels: [channel],
@@ -95,7 +109,7 @@ eon.chart({
     },
     gauge: {
       min: 0,
-      max: 1000
+      max: 10000
     }
   },
 
@@ -107,8 +121,34 @@ eon.chart({
     };
   }
 });
-    </script>
-    <script>
+   <!--亮度传感器图表结束 -->
+    
+  <!--湿度传感器图表 --> 
+    eon.chart({
+  pubnub: pubnub,
+  channels: [channel],
+  generate: {
+    bindto: "#chart2",
+    data: {
+      type: "gauge"
+    },
+    gauge: {
+      min: 0,
+      max: 100
+    }
+  },
+
+  transform: function(m) {
+    return {
+      eon: {
+        light: m.humidity
+      }
+    };
+  }
+});
+   <!--湿度传感器图表结束 --> 
+   
+    <!--温度传感器图表 -->
   eon.chart({
   pubnub: pubnub,
   channels: [channel],
@@ -131,10 +171,11 @@ eon.chart({
     };
   }
 });
-
-     
-    </script>
   
+ </script>
+      <!--温度传感器图表结束 -->
+      
+      <!--控制开关部分 -->
    <input type=button style="margin:10px 30px;width:100px;height:40px;" value="LED开关" onclick="justice();">
  <script>
   
@@ -157,19 +198,24 @@ eon.chart({
     message: {
         "led" : state }, 
   	 channel:['WINC1500_FE:4C']
-      }
+  }
     )  
   }
  </script>
-   <script>
-  setInterval("st()",3500);
+      <!--控制开关部分结束 -->
+      
+      <!--开关状态检测 -->
+ <script>
+  setInterval("st()",3000);
    
   function st(){
-		 var sta=window.document .getElementById("LED");
-     sta.innerHTML = flag; 
+		 var sta=window.document .getElementById 						("LED");
+    sta.innerHTML = flag; 
 }  
  </script>  
    LED状态：
 <span id="LED"></span>
+      <!--开关状态检测结束 -->
   </body>
 </html>
+
